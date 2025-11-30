@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST Digit Recognition App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MNIST Digit Recognition</h1>
+            <p>Advanced handwriting recognition for digits</p>
+        </header>
+        
+        <nav class="main-nav">
+            <button class="nav-btn active" data-page="canvas">Drawing Canvas</button>
+            <button class="nav-btn" data-page="camera">Camera Capture</button>
+        </nav>
+
+        <main>
+            <!-- Drawing Canvas Page -->
+            <div id="canvas-page" class="page active">
+                <div class="canvas-container">
+                    <h2>Draw a Digit</h2>
+                    <p>Use your mouse, stylus, or finger to draw a digit (0-9)</p>
+                    <div class="canvas-wrapper">
+                        <canvas id="drawingCanvas" width="400" height="400"></canvas>
+                        <div class="canvas-controls">
+                            <button id="clearCanvas" class="btn btn-secondary">Clear</button>
+                            <button id="predictDigit" class="btn btn-primary">Predict 1 Digit</button>
+                            <button id="predictTwoDigits" class="btn btn-primary">Predict 2 Digits</button>
+                        </div>
+                    </div>
+                    <div class="prediction-result">
+                        <h3>Prediction: <span id="predictedDigit">-</span></h3>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+                        <p>Confidence: <span id="confidenceText">0%</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camera Capture Page -->
+            <div id="camera-page" class="page">
+                <div class="camera-container">
+                    <h2>Camera Capture</h2>
+                    <p>Take a photo of handwritten digits or upload an image</p>
+                    <div class="camera-wrapper">
+                        <video id="cameraVideo" autoplay playsinline></video>
+                        <canvas id="cameraCanvas" style="display: none;"></canvas>
+                        <div class="camera-controls">
+                            <button id="startCamera" class="btn btn-primary">Start Camera</button>
+                            <button id="capturePhoto" class="btn btn-secondary" disabled>Capture</button>
+                            <button id="stopCamera" class="btn btn-danger" disabled>Stop Camera</button>
+                        </div>
+                        <div class="file-upload">
+                            <input type="file" id="imageUpload" accept="image/*">
+                            <label for="imageUpload" class="btn btn-secondary">Upload Image</label>
+                        </div>
+                    </div>
+                    <div class="captured-image">
+                        <img id="capturedImg" style="display: none;" alt="Captured image">
+                        <div class="image-prediction">
+                            <h3>Prediction: <span id="imagePredictedDigit">-</span></h3>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="imageConfidenceFill"></div>
+                            </div>
+                            <p>Confidence: <span id="imageConfidenceText">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Flask API Integration -->
+    <script src="script-with-flask.js"></script>
+</body>
+</html>
